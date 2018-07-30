@@ -12,14 +12,14 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
-import environ
+#import environ
 
-root = environ.Path(__file__) - 2
-env = environ.Env(DEBUG=(bool, False))
-environ.Env.read_env()
+#root = environ.Path(__file__) - 2
+#env = environ.Env(DEBUG=(bool, False))
+#environ.Env.read_env()
 
 BASE_DIR = str(root)
-SECRET_KEY = env.str('SECRET_KEY', 'my-santa-claus')
+#SECRET_KEY = env.str('SECRET_KEY', 'my-santa-claus')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 #BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -29,15 +29,15 @@ SECRET_KEY = env.str('SECRET_KEY', 'my-santa-claus')
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '!tzh82mc1$lvscphfkmn1r7v+^f1skri266$@j)fl3nwh+es%('
+SECRET_KEY = '!tzh82mc1$lvscphfkmn1r7v+^f1skri266$@j)fl3nwh+es%('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-#DEBUG = True
+DEBUG = True
 
-#ALLOWED_HOSTS = ['*']
-DEBUG = env.bool('DEBUG', True)
+ALLOWED_HOSTS = ['127.0.0.1', 'perevozchikov.online']
+# DEBUG = env.bool('DEBUG', True)
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
+#ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=[])
 
 # Application definition
 
