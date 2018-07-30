@@ -1,45 +1,62 @@
-from django.shortcuts import render
-from .models import BotHandler
+# -*- coding: utf8 -*-
 
-# Create your views here.
+import json
+import logging
+
+import telepot
+from django.template.loader import render_to_string
+from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
+from django.views.generic import View
+from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
+from django.conf import settings
+
+from .utils import parse_football_sportexp_rss
 
 
-greet_bot = BotHandler(token)
-greetings = ('здравствуй', 'привет', 'ку', 'здорово')
-now = datetime.datetime.now()
+TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
+
+logger = logging.getLogger('telegram.bot')
 
 
-def main():
-    new_offset = None
-    today = now.day
-    hour = now.hour
+def _display_help():
+    return render_to_string('help.md')
 
-    while True:
-        greet_bot.get_updates(new_offset)
 
-        last_update = greet_bot.get_last_update()
+def _display_feed():
+    return render_to_string('feed.md', {'items': parse_football_sportexp_rss()})
 
-        last_update_id = last_update['update_id']
-        last_chat_text = last_update['message']['text']
-        last_chat_id = last_update['message']['chat']['id']
-        last_chat_name = last_update['message']['chat']['first_name']
 
-        if last_chat_text.lower() in greetings and today == now.day and 6 <= hour < 12:
-            greet_bot.send_message(last_chat_id, 'Доброе утро, {}'.format(last_chat_name))
-            today += 1
+class CommandReceiveView(View):
+    def post(self, request, bot_token):
+        if bot_token != settings.TELEGRAM_BOT_TOKEN:
+            return HttpResponseForbidden('Invalid token')
 
-        elif last_chat_text.lower() in greetings and today == now.day and 12 <= hour < 17:
-            greet_bot.send_message(last_chat_id, 'Добрый день, {}'.format(last_chat_name))
-            today += 1
+        commands = {
+            '/start': _display_help,
+            'help': _display_help,
+            'football_feed': _display_feed,
+        }
 
-        elif last_chat_text.lower() in greetings and today == now.day and 17 <= hour < 23:
-            greet_bot.send_message(last_chat_id, 'Добрый вечер, {}'.format(last_chat_name))
-            today += 1
+        raw = request.body.decode('utf-8')
+        logger.info(raw)
 
-        new_offset = last_update_id + 1
+        try:
+            payload = json.loads(raw)
+        except ValueError:
+            return HttpResponseBadRequest('Invalid request body')
+        else:
+            chat_id = payload['message']['chat']['id']
+            cmd = payload['message'].get('text')  # command
 
-if __name__ == '__main__':
-    try:
-        main()
-    except KeyboardInterrupt:
-        exit()
+            func = commands.get(cmd.split()[0].lower())
+            if func:
+                TelegramBot.sendMessage(chat_id, func(), parse_mode='Markdown')
+            else:
+                TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
+
+        return JsonResponse({}, status=200)
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CommandReceiveView, self).dispatch(request, *args, **kwargs)
