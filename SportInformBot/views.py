@@ -42,7 +42,7 @@ class CommandReceiveView(View):
         }
 
         raw = request.body.decode('utf-8')
-        logger.info(raw)
+#        logger.info(raw)
 
         try:
             payload = json.loads(raw)
