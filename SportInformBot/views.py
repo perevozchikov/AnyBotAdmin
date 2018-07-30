@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 import json
-#import logging
+import logging
 
 import telepot
 from django.template.loader import render_to_string
@@ -16,7 +16,7 @@ from .utils import parse_football_sportru_rss, parse_hockey_sportru_rss
 
 TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
 
-#logger = logging.getLogger('telegram.bot')
+logger = logging.getLogger('telegram.bot')
 
 
 def _display_help():
@@ -42,7 +42,7 @@ class CommandReceiveView(View):
         }
 
         raw = request.body.decode('utf-8')
-#        logger.info(raw)
+        logger.info(raw)
 
         try:
             payload = json.loads(raw)
