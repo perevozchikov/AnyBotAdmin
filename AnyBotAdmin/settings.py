@@ -130,7 +130,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', 'test')
+#TELEGRAM_BOT_TOKEN = env.str('TELEGRAM_BOT_TOKEN', 'test')
+TELEGRAM_BOT_TOKEN='631895922:AAHrRowaIaY3OHB6KN6hw9fwKt02NMtz-LI'
 
 LOGGING = {
     'version': 1,
