@@ -6,9 +6,10 @@ import requests
 
 
 def parse_football_sportexp_rss():
-    """Parses first 10 items from https://www.sport-express.ru/services/materials/news/football/se/
+    """Parses first 10 items from https://www.sport.ru/rssfeeds/football.rss
+    
     """
-    response = requests.get('https://www.sport-express.ru/services/materials/news/football/se/')
+    response = requests.get('https://www.sport.ru/rssfeeds/football.rss')
     parsed_xml = cElementTree.fromstring(response.content)
     items = []
 
