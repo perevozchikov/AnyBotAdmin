@@ -38,7 +38,7 @@ class CommandReceiveView(View):
             '/start': _display_help,
             'help': _display_help,
             'football_feed': _display_football_feed,
-            'hokkey_feed': _display_hockey_feed,
+            'hockey_feed': _display_hockey_feed,
         }
 
         raw = request.body.decode('utf-8')
