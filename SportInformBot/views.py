@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
 
 import json
-import logging
+#import logging
 
 import telepot
 from django.template.loader import render_to_string
@@ -11,21 +11,23 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.conf import settings
 
-from .utils import parse_football_sportexp_rss
+from .utils import parse_football_sportru_rss, parse_hockey_sportru_rss
 
 
 TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
 
-logger = logging.getLogger('telegram.bot')
+#logger = logging.getLogger('telegram.bot')
 
 
 def _display_help():
     return render_to_string('help.md')
 
 
-def _display_feed():
-    return render_to_string('feed.md', {'items': parse_football_sportexp_rss()})
+def _display_football_feed():
+    return render_to_string('feed.md', {'items': parse_football_sportru_rss()})
 
+def _display_hockey_feed():
+    return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
 
 class CommandReceiveView(View):
     def post(self, request, bot_token):
@@ -35,7 +37,8 @@ class CommandReceiveView(View):
         commands = {
             '/start': _display_help,
             'help': _display_help,
-            'football_feed': _display_feed,
+            'football_feed': _display_football_feed,
+            'hokkey_feed': _display_hockey_feed,
         }
 
         raw = request.body.decode('utf-8')
