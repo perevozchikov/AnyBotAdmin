@@ -30,7 +30,7 @@ def _display_hockey_feed():
     return render({'items': parse_hockey_sportru_rss()})
 
 def ren_to_str():
-    return render_to_string('feed.md', item)
+    return render_to_string('feed.md', i)
 
 class CommandReceiveView(View):
     def post(self, request, bot_token):
@@ -58,7 +58,6 @@ class CommandReceiveView(View):
             func = commands.get(cmd.split()[0].lower())
             if func:
                 for i in func():
-                    ren_to_str(i)
                     TelegramBot.sendMessage(chat_id, ren_to_str(i), parse_mode='Markdown')
             else:
                 TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
