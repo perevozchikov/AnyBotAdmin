@@ -57,7 +57,7 @@ class CommandReceiveView(View):
 
             func = commands.get(cmd.split()[0].lower())
             if func:
-                for i in items
+                for i in func()
                     ren_to_str(i)
                     TelegramBot.sendMessage(chat_id, ren_to_str(i), parse_mode='Markdown')
             else:
