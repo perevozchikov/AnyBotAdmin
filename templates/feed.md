@@ -1,1 +1,3 @@
-[{{ i.title }}]({{ i.link }})
+{% for item in items %}
+[{{ item.title }}]({{ item.link }})
+{% endfor %}
