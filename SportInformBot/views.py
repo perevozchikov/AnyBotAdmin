@@ -42,7 +42,7 @@ shipping_options = [
 #    return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
 class CommandReceiveView(View):
     def post(self, request, bot_token):
-        if bot_token != TOKEN:
+        if bot_token != settings.TELEGRAM_BOT_TOKEN:
             return HttpResponseForbidden('Invalid token')
 #        commands = {
 #            '/start': _display_help,
