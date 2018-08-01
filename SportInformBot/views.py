@@ -55,7 +55,7 @@ class CommandReceiveView(View):
             return HttpResponseBadRequest('Invalid request body')
         else:
             update = telebot.types.Update.de_json(json_string)
-            bot.process_new_updates([update])
+            bot.process_new_messages([update.message])
             @bot.message_handler(func=lambda message: True, content_types=['/start', '/help'])
             def command_start(message):
                 bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
