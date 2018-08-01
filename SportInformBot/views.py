@@ -41,18 +41,6 @@ shipping_options = [
 #def _display_hockey_feed():
 #    return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
 
-class CommandReceiveView(View):
-    def post(self, request, bot_token):
-        if bot_token != settings.TELEGRAM_BOT_TOKEN:
-            return HttpResponseForbidden('Invalid token')
-        @bot.message_handler(commands=['start', 'help'])
-        def command_start(message):
-            bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
-
-
-        return JsonResponse({}, status=200)
-
-
-    @method_decorator(csrf_exempt)
-    def dispatch(self, request, *args, **kwargs):
-        return super(CommandReceiveView, self).dispatch(request, *args, **kwargs)
+@bot.message_handler(commands=['start', 'help'])
+def command_start(message):
+    bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
