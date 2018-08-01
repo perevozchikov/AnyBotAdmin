@@ -24,7 +24,7 @@ def parse_football_sportru_rss():
 
             items.append(item)
 
-    return items[:1]
+    return items[:10]
 
 def parse_hockey_sportru_rss():
     """Parses first 10 items from https://www.sport.ru/rssfeeds/hockey.rss
@@ -45,4 +45,4 @@ def parse_hockey_sportru_rss():
 
             items.append(item)
 
-    return items[:1]
+    return items[:10]
