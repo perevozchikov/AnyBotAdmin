@@ -35,13 +35,18 @@ shipping_options = [
 #def _display_help():
 # return render_to_string('help.md')
 
-@bot.message_handler(commands=['start', 'help'])
-def command_start(message):
-    bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
-
-
 #def _display_football_feed():
 #    return render_to_string('feed.md', {'items': parse_football_sportru_rss()})
 
 #def _display_hockey_feed():
 #    return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
+
+class CommandReceiveView(View):
+    @bot.message_handler(commands=['start', 'help'])
+    def command_start(message):
+        bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
+
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, request, *args, **kwargs):
+        return super(CommandReceiveView, self).dispatch(request, *args, **kwargs)
