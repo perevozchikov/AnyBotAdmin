@@ -37,7 +37,7 @@ shipping_options = [
 
 @bot.message_handler(commands=['start', 'help'])
 def command_start(message):
-    bot.send_message(message.chat.id, help.md)
+    bot.send_message(message.chat.id, "Hello, I'm the demo merchant bot.")
 
 
 #def _display_football_feed():
