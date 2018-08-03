@@ -19,21 +19,6 @@ TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
 logger = logging.getLogger('telegram.bot')
 
 
-def send_invoice(seed_tuple):
-    msg = seed_tuple[1]
-
-    content_type, chat_type, chat_id = telepot.glance(msg)
-
-    if content_type == 'text':
-        bot.sendInvoice(chat_id, "Nick's Hand Cream", "Keep a man's hand like a woman's",
-            payload='a-string-identifying-related-payment-messages-tuvwxyz',
-            provider_token=settings.PAYMENT_PROVIDER_TOKEN,
-            start_parameter='abc',
-            currency='HKD', prices=[
-                LabeledPrice(label='One Case', amount=987),
-                LabeledPrice(label='Package', amount=12)],
-            need_shipping_address=True, is_flexible=True)  # required for shipping query
-
 def _display_help():
     return render_to_string('help.md')
 
