@@ -29,6 +29,9 @@ def _display_football_feed():
 def _display_hockey_feed():
     return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
 
+def _start_payments():
+    return pass
+    
 class CommandReceiveView(View):
     def post(self, request, bot_token):
         if bot_token != settings.TELEGRAM_BOT_TOKEN:
