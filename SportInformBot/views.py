@@ -24,7 +24,11 @@ def _display_help():
 
 
 def _display_football_feed():
-    return render_to_string('feed.md', {'items': parse_football_sportru_rss()})
+    football_items = parse_football_sportru_rss()
+    return football_items
+
+def _split_fnews():
+    return render_to_string('feed.md', 'items')
 
 def _display_hockey_feed():
     return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
@@ -57,7 +61,11 @@ class CommandReceiveView(View):
             cmd = payload['message'].get('text')  # command
 
             func = commands.get(cmd.split()[0].lower())
-            if func:
+            if func == 'football_feed':
+                fitems = func()
+                for fnews in fitems:
+                    TelegramBot.sendMessage(chat_id, _split_fnews(fnews), parse_mode='Markdown')
+            elif func != 'football_feed':
                 TelegramBot.sendMessage(chat_id, func(), parse_mode='Markdown')
             else:
                 TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
