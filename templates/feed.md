@@ -1,3 +1,1 @@
-{% for item in news %}
-[{{ item.title }}]({{ item.link }})
-{% endfor %}
+[{{ news.title }}]({{ news.link }})
