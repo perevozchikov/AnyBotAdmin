@@ -69,7 +69,7 @@ class CommandReceiveView(View):
 
             func = commands.get(cmd.split()[0].lower())
             if func:
-                func()
+                func(chat_id)
             else:
                 TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
 
