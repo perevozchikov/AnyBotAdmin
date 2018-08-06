@@ -20,7 +20,8 @@ logger = logging.getLogger('telegram.bot')
 
 COMD = ''
 def _display_help():
-    return render_to_string('help.md')
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
+    return pass
 
 def split_fnews():
     return render_to_string('feed.md', fnews)
