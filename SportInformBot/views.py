@@ -61,11 +61,11 @@ class CommandReceiveView(View):
             cmd = payload['message'].get('text')  # command
 
             func = commands.get(cmd.split()[0].lower())
-            if func == 'football_feed':
+            if cmd == 'football_feed':
             #    fitems = func()
             #    for fnews in fitems:
             #        kolitems += kolitems
-                TelegramBot.sendMessage(chat_id, func, parse_mode='Markdown')
+                TelegramBot.sendMessage(chat_id, cmd, parse_mode='Markdown')
             elif func != 'football_feed':
                 TelegramBot.sendMessage(chat_id, func(), parse_mode='Markdown')
             else:
