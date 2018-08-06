@@ -35,7 +35,12 @@ def _display_football_feed():
 
 
 def _display_hockey_feed():
-    return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
+    hockey_items = parse_hockey_sportru_rss()
+    for hnews in hockey_items:
+        hmsg = split_fnews(hnews)
+        TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
+
+    return pass
 
 def _start_payments():
     return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
