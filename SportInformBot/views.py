@@ -26,7 +26,7 @@ def _display_help(chat_id):
 def _display_football_feed(chat_id):
     football_items = parse_football_sportru_rss()
     for news in football_items:
-        fmsg = render_to_string('feed.md', news)
+        fmsg = news.title
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
     return None
