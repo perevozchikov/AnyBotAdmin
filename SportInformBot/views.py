@@ -23,13 +23,10 @@ def _display_help():
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
     return None
 
-def split_news():
-    return render_to_string('feed.md', news)
-
 def _display_football_feed():
     football_items = parse_football_sportru_rss()
     for news in football_items:
-        fmsg = split_news()
+        fmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
     return None
@@ -38,7 +35,7 @@ def _display_football_feed():
 def _display_hockey_feed():
     hockey_items = parse_hockey_sportru_rss()
     for news in hockey_items:
-        hmsg = split_news()
+        hmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
 
     return None
