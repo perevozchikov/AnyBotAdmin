@@ -29,7 +29,7 @@ def split_news():
 def _display_football_feed():
     football_items = parse_football_sportru_rss()
     for news in football_items:
-        fmsg = split_news(news)
+        fmsg = split_news()
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
     return None
@@ -38,7 +38,7 @@ def _display_football_feed():
 def _display_hockey_feed():
     hockey_items = parse_hockey_sportru_rss()
     for news in hockey_items:
-        hmsg = split_news(news)
+        hmsg = split_news()
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
 
     return None
