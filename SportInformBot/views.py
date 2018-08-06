@@ -18,16 +18,16 @@ TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
 
 logger = logging.getLogger('telegram.bot')
 
-
+COMD = ''
 def _display_help():
     return render_to_string('help.md')
 
 
-def _display_football_feed():
+def _display_football_feed(COMD):
 #    football_items = parse_football_sportru_rss()
 #    for fnews in football_items:
 #        fmsg = split_fnews()
-    fmsg = cmd    
+    fmsg = COMD
     return fmsg
 
 def split_fnews():
@@ -64,6 +64,7 @@ class CommandReceiveView(View):
             cmd = payload['message'].get('text')  # command
 
             func = commands.get(cmd.split()[0].lower())
+            COMD = cmd
             if func:
                 TelegramBot.sendMessage(chat_id, func(), parse_mode='Markdown')
             else:
