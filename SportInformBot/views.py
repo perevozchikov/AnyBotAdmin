@@ -28,7 +28,7 @@ def _display_football_feed():
     return football_items
 
 def _split_fnews():
-    return render_to_string('feed.md', 'fnews')
+    return render_to_string('feed.md', fnews)
 
 def _display_hockey_feed():
     return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
