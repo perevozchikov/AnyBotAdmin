@@ -1,1 +1,1 @@
-[{{ items.title }}]({{ items.link }})
+[{{ title }}]({{ link }})
