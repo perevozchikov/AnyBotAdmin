@@ -18,30 +18,30 @@ TelegramBot = telepot.Bot(settings.TELEGRAM_BOT_TOKEN)
 
 logger = logging.getLogger('telegram.bot')
 
-COMD = ''
+
 def _display_help():
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
-    return pass
+    return None
 
-def split_fnews():
-    return render_to_string('feed.md', fnews)
+def split_news():
+    return render_to_string('feed.md', news)
 
 def _display_football_feed():
     football_items = parse_football_sportru_rss()
-    for fnews in football_items:
-        fmsg = split_fnews(fnews)
+    for news in football_items:
+        fmsg = split_news(news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
-    return pass
+    return None
 
 
 def _display_hockey_feed():
     hockey_items = parse_hockey_sportru_rss()
-    for hnews in hockey_items:
-        hmsg = split_fnews(hnews)
+    for news in hockey_items:
+        hmsg = split_news(news)
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
 
-    return pass
+    return None
 
 def _start_payments():
     return render_to_string('feed.md', {'items': parse_hockey_sportru_rss()})
