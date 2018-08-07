@@ -36,7 +36,6 @@ def _display_football_feed(chat_id):
         fmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
-
     return None
 
 
@@ -74,16 +73,15 @@ class CommandReceiveView(View):
 
 
             flavor = telepot.flavor(payload['message'])
-            #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
+            TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
             if flavor == 'callback_query':
+
                 query_id, from_id, query_data = telepot.glance(payload['message'], flavor='callback_query')
-
-                if query_data == 'football_feed':
-                    TelegramBot.answerCallbackQuery(query_id, text='Ok. But I am going to keep asking.')
+                TelegramBot.sendMessage(chat_id, query_data, parse_mode='Markdown')
                 cmd = query_data
+                chat_id = from_id
 
-
-            else:
+            elif flavor == 'chat':
                 chat_id = payload['message']['chat']['id']
                 cmd = payload['message'].get('text')  # command
 
