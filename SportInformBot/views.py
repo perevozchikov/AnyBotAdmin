@@ -4,7 +4,7 @@ import json
 import logging
 
 import telepot
-from telepot import telepot.helper
+import telepot.helper
 from telepot.namedtuple import ReplyKeybpardMarkup, KeyboardButton
 from django.template.loader import render_to_string
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
