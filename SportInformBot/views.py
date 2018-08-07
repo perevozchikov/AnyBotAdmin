@@ -4,6 +4,8 @@ import json
 import logging
 
 import telepot
+from telepot import telepot.helper
+from telepot.namedtuple import ReplyKeybpardMarkup, KeyboardButton
 from django.template.loader import render_to_string
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.generic import View
@@ -21,6 +23,7 @@ logger = logging.getLogger('telegram.bot')
 
 def _display_help(chat_id):
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
+    TelegramBot.sendMessage(chat_id, 'keyboard', reply_markup=ReplyKeybpardMarkup(keyboard=[[KeyboardButton(text='football'), KeyboardButton(text='hockey')]]))
     return None
 
 def _display_football_feed(chat_id):
