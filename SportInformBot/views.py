@@ -49,6 +49,8 @@ def _display_hockey_feed(chat_id):
 
 
 class CommandReceiveView(View):
+    def on_callback_query():
+
     def post(self, request, bot_token):
         if bot_token != settings.TELEGRAM_BOT_TOKEN:
             return HttpResponseForbidden('Invalid token')
@@ -69,9 +71,10 @@ class CommandReceiveView(View):
             return HttpResponseBadRequest('Invalid request body')
         else:
 
-            #flavor = telepot.flavor(payload)
+            flavor = telepot.flavor(payload)
             chat_id = payload['message']['chat']['id']
             cmd = payload['message'].get('text')  # command
+            TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
             #if flavor == 'callback_query' and cmd != '/start':
             #    query_id, from_id, query_data = telepot.glance(payload, flavor='callback_query')
 
