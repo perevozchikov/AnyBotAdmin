@@ -22,8 +22,8 @@ logger = logging.getLogger('telegram.bot')
 
 
 def _display_help(chat_id):
-    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
-    TelegramBot.sendMessage(chat_id, 'keyboard', reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='football'), KeyboardButton(text='hockey')]]))
+    #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='football_feed'), KeyboardButton(text='hockey_feed')]]))
     return None
 
 def _display_football_feed(chat_id):
