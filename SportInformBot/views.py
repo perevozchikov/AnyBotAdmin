@@ -68,10 +68,17 @@ class CommandReceiveView(View):
         except ValueError:
             return HttpResponseBadRequest('Invalid request body')
         else:
-            chat_id = payload['message']['chat']['id']
-            cmd = payload['message'].get('text')  # command
+            content_type, chat_type, chat_id = telepot.glance(payload)
+
+
+
+            if content_type == 'callback_query':
+                cmd = payload['message']['data'].get('text')
+            else:
+                cmd = payload['message'].get('text')  # command
 
             func = commands.get(cmd.split()[0].lower())
+
             if func:
                 func(chat_id)
             else:
