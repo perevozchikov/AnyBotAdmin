@@ -31,7 +31,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!tzh82mc1$lvscphfkmn1r7v+^f1skri266$@j)fl3nwh+es%('
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1', 'perevozchikov.online']
 # DEBUG = env.bool('DEBUG', True)
