@@ -78,8 +78,8 @@ class CommandReceiveView(View):
             if flavor == 'callback_query':
                 query_id, from_id, query_data = telepot.glance(payload['message'], flavor='callback_query')
 
-                #if query_data == 'football_feed':
-                #    TelegramBot.answerCallbackQuery(query_id, text='Ok. But I am going to keep asking.')
+                if query_data == 'football_feed':
+                    TelegramBot.answerCallbackQuery(query_id, text='Ok. But I am going to keep asking.')
                 cmd = query_data
 
 
