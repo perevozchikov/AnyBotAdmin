@@ -5,7 +5,7 @@ import logging
 
 import telepot
 import telepot.helper
-from telepot.namedtuple import ReplyKeyboardMarkup, KeyboardButton
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
 from django.template.loader import render_to_string
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.generic import View
@@ -23,7 +23,11 @@ logger = logging.getLogger('telegram.bot')
 
 def _display_help(chat_id):
     #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
-    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола', callback_data='football_feed'), KeyboardButton(text='hockey_feed')]]))
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'),
+        reply_markup=InlineKeyboardMarkup(
+        inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
+        callback_data='football_feed'),
+        InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
     return None
 
 def _display_football_feed(chat_id):
