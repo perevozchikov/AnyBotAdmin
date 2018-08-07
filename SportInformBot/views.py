@@ -83,7 +83,7 @@ class CommandReceiveView(View):
                 cmd = query_data
 
 
-            elif flavor == 'chat':
+            else:
                 chat_id = payload['message']['chat']['id']
                 cmd = payload['message'].get('text')  # command
 
