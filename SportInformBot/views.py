@@ -73,7 +73,7 @@ class CommandReceiveView(View):
 
 
             flavor = telepot.flavor(payload['message'])
-            TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
+
             if flavor == 'callback_query':
 
                 query_id, from_id, query_data = telepot.glance(payload['message'], flavor='callback_query')
@@ -84,7 +84,7 @@ class CommandReceiveView(View):
             elif flavor == 'chat':
                 chat_id = payload['message']['chat']['id']
                 cmd = payload['message'].get('text')  # command
-
+                TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
 
 
 
