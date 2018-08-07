@@ -70,10 +70,10 @@ class CommandReceiveView(View):
         else:
 
             flavor = telepot.flavor(payload)
-
+            chat_id = payload['message']['chat']['id']
             if flavor == 'callback_query':
                 query_id, from_id, query_data = telepot.glance(payload, flavor='callback_query')
-                chat_id = from_id
+
                 cmd = query_data
                 #chat_id = telepot.glance(payload, flavor='callback_query')
                 #cmd = payload['data']
