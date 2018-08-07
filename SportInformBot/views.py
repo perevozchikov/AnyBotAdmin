@@ -49,7 +49,7 @@ def _display_hockey_feed(chat_id):
 
 
 class CommandReceiveView(View):
-    def on_callback_query():
+    
 
     def post(self, request, bot_token):
         if bot_token != settings.TELEGRAM_BOT_TOKEN:
