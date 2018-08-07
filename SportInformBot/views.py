@@ -71,14 +71,15 @@ class CommandReceiveView(View):
 
             flavor = telepot.flavor(payload)
             chat_id = payload['message']['chat']['id']
-            if flavor == 'callback_query':
+            cmd = payload['message'].get('text')  # command
+            if flavor == 'callback_query' and cmd != '/start':
                 query_id, from_id, query_data = telepot.glance(payload, flavor='callback_query')
 
                 cmd = query_data
                 #chat_id = telepot.glance(payload, flavor='callback_query')
                 #cmd = payload['data']
-            else:
-                cmd = payload['message'].get('text')  # command
+            
+
 
             func = commands.get(cmd.split()[0].lower())
 
