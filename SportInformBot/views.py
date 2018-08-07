@@ -80,7 +80,7 @@ class CommandReceiveView(View):
 
                 if query_data == 'football_feed':
                     TelegramBot.answerCallbackQuery(query_id, text='Ok. But I am going to keep asking.')
-                cmd = query_data
+                cmd = query_dat
 
 
             else:
