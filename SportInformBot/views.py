@@ -69,16 +69,16 @@ class CommandReceiveView(View):
             return HttpResponseBadRequest('Invalid request body')
         else:
 
-            flavor = telepot.flavor(payload)
+            #flavor = telepot.flavor(payload)
             chat_id = payload['message']['chat']['id']
             cmd = payload['message'].get('text')  # command
-            if flavor == 'callback_query' and cmd != '/start':
-                query_id, from_id, query_data = telepot.glance(payload, flavor='callback_query')
+            #if flavor == 'callback_query' and cmd != '/start':
+            #    query_id, from_id, query_data = telepot.glance(payload, flavor='callback_query')
 
-                cmd = query_data
+            #    cmd = query_data
                 #chat_id = telepot.glance(payload, flavor='callback_query')
                 #cmd = payload['data']
-            
+
 
 
             func = commands.get(cmd.split()[0].lower())
