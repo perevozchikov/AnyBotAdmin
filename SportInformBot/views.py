@@ -64,8 +64,8 @@ def _send_invoice(chat_id):
                 provider_token=settings.PAYMENT_PROVIDER_TOKEN,
                 start_parameter='abc',
                 currency='RUB', prices=[
-                LabeledPrice(label='One Case', amount=987),
-                LabeledPrice(label='Package', amount=12)],
+                LabeledPrice(label='One Case', amount=1000),
+                LabeledPrice(label='Package', amount=10000)],
                 need_shipping_address=True, is_flexible=True)  # required for shipping query
     return None
 
