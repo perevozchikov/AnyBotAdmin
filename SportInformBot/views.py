@@ -28,7 +28,7 @@ def _display_help(chat_id):
         inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
         callback_data='football_feed'),
         InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
-    return chat_id
+    return None
 
 def _display_football_feed(chat_id):
     football_items = parse_football_sportru_rss()
@@ -36,7 +36,7 @@ def _display_football_feed(chat_id):
         fmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
-    return chat_id
+    return None
 
 
 def _display_hockey_feed(chat_id):
@@ -45,7 +45,7 @@ def _display_hockey_feed(chat_id):
         hmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
 
-    return chat_id
+    return None
 
 
 class CommandReceiveView(View):
@@ -75,7 +75,7 @@ class CommandReceiveView(View):
             #flavor = telepot.flavor(payload['message'])
             if 'callback_query' in payload:
                 query_id, from_id, query_data = telepot.glance(payload['callback_query'], flavor='callback_query')
-                TelegramBot.sendMessage(chat_id, query_data, parse_mode='Markdown')
+                #TelegramBot.sendMessage(chat_id, query_data, parse_mode='Markdown')
                 cmd = query_data
                 #chat_id = from_id
             elif 'message' in payload:
