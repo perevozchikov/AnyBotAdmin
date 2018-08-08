@@ -27,7 +27,8 @@ def _display_help(chat_id):
         reply_markup=InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
         callback_data='football_feed'),
-        InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
+        InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed'), InlineKeyboardButton(text='Что сегодня в продаже?',
+        callback_data='buy')]]))
     return None
 
 def _display_football_feed(chat_id):
