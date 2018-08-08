@@ -59,14 +59,22 @@ def _display_hockey_feed(chat_id):
     return None
 
 def _send_invoice(chat_id):
-    TelegramBot.sendInvoice(chat_id, "Nick's Hand Cream", "Keep a man's hand like a woman's",
+    TelegramBot.sendInvoice(chat_id, "Gaming console PS4(USED)", "Greates gaming console in the world",
                 payload='a-string-identifying-related-payment-messages-tuvwxyz',
                 provider_token=settings.PAYMENT_PROVIDER_TOKEN,
                 start_parameter='abc',
-                currency='RUB', prices=[
-                LabeledPrice(label='One Case', amount=1000),
-                LabeledPrice(label='Package', amount=10000)],
+                currency='RUB', prices=[LabeledPrice(label='One Case', amount=320000),],
                 need_shipping_address=True, is_flexible=True)  # required for shipping query
+    return None
+
+def _payment_succes(chat_id):
+
+    TelegramBot.sendMessage(chat_id, render_to_string('On_succes_payment.md'),
+        reply_markup=InlineKeyboardMarkup(
+        inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
+        callback_data='football_feed'),
+        InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
+
     return None
 
 class CommandReceiveView(View):
@@ -82,6 +90,7 @@ class CommandReceiveView(View):
             'football_feed': _display_football_feed,
             'hockey_feed': _display_hockey_feed,
             'buy': _send_invoice,
+            'successful_payment': _payment_succes,
         }
 
         raw = request.body.decode('utf-8')
