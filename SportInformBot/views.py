@@ -35,7 +35,7 @@ def _display_football_feed(chat_id):
     for news in football_items:
         fmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
-    TelegramBot.sendMessage(chat_id,
+    TelegramBot.sendMessage(chat_id, text='',
         reply_markup=InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
         callback_data='football_feed'),
@@ -50,7 +50,7 @@ def _display_hockey_feed(chat_id):
     for news in hockey_items:
         hmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
-    TelegramBot.sendMessage(chat_id,
+    TelegramBot.sendMessage(chat_id, text='',
         reply_markup=InlineKeyboardMarkup(
         inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
         callback_data='football_feed'),
