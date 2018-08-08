@@ -83,7 +83,7 @@ class CommandReceiveView(View):
                     #chat_id = from_id
             elif telepot.flavor(payload['message']):
                 flavor = telepot.flavor(payload['message'])
-                elif flavor == 'chat':
+                if flavor == 'chat':
                     chat_id = payload['message']['chat']['id']
                     cmd = payload['message'].get('text')  # command
                     TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
