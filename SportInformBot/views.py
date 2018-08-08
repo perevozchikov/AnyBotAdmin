@@ -81,7 +81,7 @@ class CommandReceiveView(View):
             elif 'message' in payload:
                 chat_id = payload['message']['chat']['id']
                 cmd = payload['message'].get('text')  # command
-                TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
+                #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
 
 
 
