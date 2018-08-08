@@ -30,6 +30,8 @@ def _display_help(chat_id):
         InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed'), InlineKeyboardButton(text='Что сегодня в продаже?',
         callback_data='buy'), InlineKeyboardButton(text='Что купить?',
         callback_data='help'), InlineKeyboardButton(text='Что завтра?',
+        callback_data='help'), InlineKeyboardButton(text='завтра?',
+        callback_data='help'), InlineKeyboardButton(text='gjcktpfdnhfзавтра?',
         callback_data='help')]]))
     return None
 
