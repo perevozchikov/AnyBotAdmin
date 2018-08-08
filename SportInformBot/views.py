@@ -125,6 +125,11 @@ class CommandReceiveView(View):
                 chat_id = from_id
                 TelegramBot.answerPreCheckoutQuery(query_id, True)
 
+            elif 'successful_payment' in pload:
+                query_id, from_id, invoice_payload = telepot.glance(pload['successful_payment'], flavor='successful_payment')
+                chat_id = from_id
+                cmd = 'successful_payment'
+
 
 
 
