@@ -63,7 +63,7 @@ def _send_invoice(chat_id):
                 payload='a-string-identifying-related-payment-messages-tuvwxyz',
                 provider_token=settings.PAYMENT_PROVIDER_TOKEN,
                 start_parameter='abc',
-                currency='USD', prices=[
+                currency='RUB', prices=[
                 LabeledPrice(label='One Case', amount=987),
                 LabeledPrice(label='Package', amount=12)],
                 need_shipping_address=True, is_flexible=True)  # required for shipping query
