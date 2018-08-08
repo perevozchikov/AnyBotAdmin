@@ -28,7 +28,7 @@ def _display_help(chat_id):
         inline_keyboard=[[InlineKeyboardButton(text='Новости футбола',
         callback_data='football_feed'),
         InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
-    return None
+    return chat_id
 
 def _display_football_feed(chat_id):
     football_items = parse_football_sportru_rss()
@@ -36,7 +36,7 @@ def _display_football_feed(chat_id):
         fmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, fmsg, parse_mode='Markdown')
 
-    return None
+    return chat_id
 
 
 def _display_hockey_feed(chat_id):
@@ -45,7 +45,7 @@ def _display_hockey_feed(chat_id):
         hmsg = render_to_string('feed.md', news)
         TelegramBot.sendMessage(chat_id, hmsg, parse_mode='Markdown')
 
-    return None
+    return chat_id
 
 
 class CommandReceiveView(View):
