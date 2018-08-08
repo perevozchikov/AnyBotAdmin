@@ -5,7 +5,7 @@ import logging
 
 import telepot
 import telepot.helper
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice, ShippingOption
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice, ShippingOption, ReplyKeyboardMarkup, KeyboardButton
 from django.template.loader import render_to_string
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.generic import View
@@ -23,10 +23,16 @@ logger = logging.getLogger('telegram.bot')
 
 def _display_help(chat_id):
 
+    #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
+    #InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости футбола', callback_data='football_feed'),
+    #InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed'),
+    #InlineKeyboardButton(text='Что сегодня в продаже?', callback_data='buy')]], resize_keyboard=True, row_width=2))
+
+
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
-    InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости футбола', callback_data='football_feed'),
-    InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed'),
-    InlineKeyboardButton(text='Что сегодня в продаже?', callback_data='buy')]], row_width=2))
+    ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='football_feed', resize_keyboard=True),
+    KeyboardButton(text='hockey_feed', resize_keyboard=True),
+    InlineKeyboardButton(text='buy', resize_keyboard=True)]]))
 
     #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     #InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
