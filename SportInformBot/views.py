@@ -110,7 +110,7 @@ class CommandReceiveView(View):
                             LabeledPrice(label='International', amount=2345)]),
                         ShippingOption(id='dhl', title='DHL', prices=[
                             LabeledPrice(label='Local', amount=342),
-                            LabeledPrice(label='International', amount=1234)])]))
+                            LabeledPrice(label='International', amount=1234)])])
             elif 'pre_checkout_query' in pload:
                 query_id, from_id, invoice_payload = telepot.glance(pload['pre_checkout_query'], flavor='pre_checkout_query')
                 chat_id = from_id
