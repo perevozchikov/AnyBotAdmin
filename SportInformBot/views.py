@@ -23,10 +23,14 @@ logger = logging.getLogger('telegram.bot')
 
 def _display_help(chat_id):
 
-    #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), parse_mode='Markdown')
-    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости футбола', callback_data='football_feed'),
-    InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed'),
-    InlineKeyboardButton(text='Что сегодня в продаже?', callback_data='buy')]]))
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
+    InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости футбола', callback_data='football_feed')]]))
+
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
+    InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
+
+    TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
+    InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Что сегодня в продаже?', callback_data='buy')]]))
     return None
 
 def _display_football_feed(chat_id):
