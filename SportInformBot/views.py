@@ -107,8 +107,12 @@ class CommandReceiveView(View):
                 cmd = query_data
                 chat_id = from_id
             elif 'message' in pload:
-                chat_id = pload['message']['chat']['id']
-                cmd = pload['message'].get('text')  # command
+                content_type, chat_type, chat_id = telepot.glance(pload['message'])
+                if content_type == 'successful_payment':
+                    cmd = 'successful_payment'
+                else:
+                    #chat_id = pload['message']['chat']['id']
+                    cmd = pload['message'].get('text')  # command
                 #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
             elif 'shipping_query' in pload:
                 query_id, from_id, invoice_payload = telepot.glance(pload['shipping_query'], flavor='shipping_query')
@@ -124,14 +128,6 @@ class CommandReceiveView(View):
                 query_id, from_id, invoice_payload = telepot.glance(pload['pre_checkout_query'], flavor='pre_checkout_query')
                 chat_id = from_id
                 TelegramBot.answerPreCheckoutQuery(query_id, True)
-
-            elif 'successful_payment' in pload:
-                query_id, from_id, invoice_payload = telepot.glance(pload['successful_payment'], flavor='successful_payment')
-                chat_id = from_id
-                cmd = 'successful_payment'
-
-
-
 
             func = commands.get(cmd.split()[0].lower())
 
