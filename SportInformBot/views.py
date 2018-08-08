@@ -5,7 +5,7 @@ import logging
 
 import telepot
 import telepot.helper
-from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton
+from telepot.namedtuple import InlineKeyboardMarkup, InlineKeyboardButton, LabeledPrice, ShippingOption
 from django.template.loader import render_to_string
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.generic import View
@@ -58,6 +58,16 @@ def _display_hockey_feed(chat_id):
 
     return None
 
+def _send_invoice(chat_id):
+    TelegramBot.sendInvoice(chat_id, "Nick's Hand Cream", "Keep a man's hand like a woman's",
+                payload='a-string-identifying-related-payment-messages-tuvwxyz',
+                provider_token=settings.PAYMENT_PROVIDER_TOKEN,
+                start_parameter='abc',
+                currency='HKD', prices=[
+                LabeledPrice(label='One Case', amount=987),
+                LabeledPrice(label='Package', amount=12)],
+                need_shipping_address=True, is_flexible=True)  # required for shipping query
+    return None
 
 class CommandReceiveView(View):
 
@@ -71,28 +81,41 @@ class CommandReceiveView(View):
             'help': _display_help,
             'football_feed': _display_football_feed,
             'hockey_feed': _display_hockey_feed,
+            'buy': _send_invoice,
         }
 
         raw = request.body.decode('utf-8')
         logger.info(raw)
 
         try:
-            payload = json.loads(raw)
+            pload = json.loads(raw)
         except ValueError:
             return HttpResponseBadRequest('Invalid request body')
         else:
-
-
-            #flavor = telepot.flavor(payload['message'])
-            if 'callback_query' in payload:
-                query_id, from_id, query_data = telepot.glance(payload['callback_query'], flavor='callback_query')
+            if 'callback_query' in pload:
+                query_id, from_id, query_data = telepot.glance(pload['callback_query'], flavor='callback_query')
                 #TelegramBot.sendMessage(chat_id, query_data, parse_mode='Markdown')
                 cmd = query_data
                 chat_id = from_id
-            elif 'message' in payload:
-                chat_id = payload['message']['chat']['id']
-                cmd = payload['message'].get('text')  # command
+            elif 'message' in pload:
+                chat_id = pload['message']['chat']['id']
+                cmd = pload['message'].get('text')  # command
                 #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
+            elif 'shipping_query' in pload:
+                query_id, from_id, invoice_payload = telepot.glance(pload['shipping_query'], flavor='shipping_query')
+                chat_id = from_id
+                TelegramBot.answerShippingQuery(query_id, True, shipping_options=[
+                        ShippingOption(id='fedex', title='FedEx', prices=[
+                            LabeledPrice(label='Local', amount=345),
+                            LabeledPrice(label='International', amount=2345)]),
+                        ShippingOption(id='dhl', title='DHL', prices=[
+                            LabeledPrice(label='Local', amount=342),
+                            LabeledPrice(label='International', amount=1234)])]))
+            elif 'pre_checkout_query' in pload:
+                query_id, from_id, invoice_payload = telepot.glance(pload['pre_checkout_query'], flavor='pre_checkout_query')
+                chat_id = from_id
+                TelegramBot.answerPreCheckoutQuery(query_id, True)
+
 
 
 
