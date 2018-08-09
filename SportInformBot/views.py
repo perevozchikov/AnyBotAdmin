@@ -148,6 +148,7 @@ class CommandReceiveView(View):
                 f.write(cmd)
                 f.close()
                 TelegramBot.sendMessage(chat_id, content_type)
+                TelegramBot.sendMessage(chat_id, cmd, parse_mode='Markdown')
                 TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
 
         return JsonResponse({}, status=200)
