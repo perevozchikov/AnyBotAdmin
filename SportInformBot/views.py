@@ -73,7 +73,7 @@ def _payment_succes(chat_id):
 def _display_video(chat_id):
     linkvideo = 'https://youtu.be/WLW4SYJve4c'
     TelegramBot.sendMessage(chat_id, linkvideo, parse_mode='Markdown')
-    linkvid = '@vid https://youtu.be/2bD4oUBoJGM'
+    linkvid = 'https://www.youtube.com/watch?v=tWu29gSLSBA'
     TelegramBot.sendMessage(chat_id, linkvid, parse_mode='Markdown')
 
     return None
