@@ -59,13 +59,13 @@ def _send_invoice(chat_id):
                 payload='a-string-identifying-related-payment-messages-tuvwxyz',
                 provider_token=settings.PAYMENT_PROVIDER_TOKEN,
                 start_parameter='abc',
-                currency='RUB', prices=[LabeledPrice(label='One Case', amount=1800000),],
+                currency='RUB', prices=[LabeledPrice(label='One Case', amount=1800000),], photo_url='/static/PS4-1024x576.jpg',
                 need_shipping_address=True, is_flexible=True)  # required for shipping query
     TelegramBot.sendInvoice(chat_id, "Сабвуфер Kixx ICQ250(USED)", "Активный сабвуфер",
                 payload='a-string-identifying-related-payment-messages-tuvwxyz',
                 provider_token=settings.PAYMENT_PROVIDER_TOKEN,
                 start_parameter='abc',
-                currency='RUB', prices=[LabeledPrice(label='One Case', amount=450000),],
+                currency='RUB', prices=[LabeledPrice(label='One Case', amount=450000),], photo_url='/static/PS4-1024x576.jpg', 
                 need_shipping_address=True, is_flexible=True)  # required for shipping query
 
     return None
