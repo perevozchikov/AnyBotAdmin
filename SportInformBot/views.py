@@ -72,7 +72,7 @@ def _payment_succes(chat_id):
 
 def _display_video(chat_id):
     linkvideo = 'https://youtu.be/2bD4oUBoJGM'
-    TelegramBot.sendVideo(chat_id, linkvideo)
+    TelegramBot.Message(chat_id, linkvideo, parse_mode='Markdown')
 
     return None
 
