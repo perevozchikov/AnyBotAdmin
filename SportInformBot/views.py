@@ -32,7 +32,7 @@ def _display_help(chat_id):
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола'),
     KeyboardButton(text='Новости хоккея'),
-    KeyboardButton(text='Что сегодня в продаже?')]]), resize_keyboard=True)
+    KeyboardButton(text='Что сегодня в продаже?')]], resize_keyboard=True))
 
     #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     #InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
