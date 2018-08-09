@@ -98,9 +98,9 @@ class CommandReceiveView(View):
         commands = {
             '/start': _display_help,
             'help': _display_help,
-            'football_feed': _display_football_feed,
-            'hockey_feed': _display_hockey_feed,
-            'buy': _send_invoice,
+            'Новости футбола': _display_football_feed,
+            'Новости хоккея': _display_hockey_feed,
+            'Что сегодня в продаже?': _send_invoice,
             'successful_payment': _payment_succes,
         }
 
@@ -123,14 +123,7 @@ class CommandReceiveView(View):
                     cmd = 'successful_payment'
                 else:
                     #chat_id = pload['message']['chat']['id']
-                    if pload['message'].get('text') == 'Новости футбола':
-                        cmd = 'football_feed'
-                    elif pload['message'].get('text') == 'Новости хоккея':
-                        cmd = 'hockey_feed'
-                    elif pload['message'].get('text') == 'Что сегодня в продаже?':
-                        cmd = 'buy'
-                    else
-                        cmd = pload['message'].get('text')  # command
+                    cmd = pload['message'].get('text')  # command
 
                 #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
             elif 'shipping_query' in pload:
