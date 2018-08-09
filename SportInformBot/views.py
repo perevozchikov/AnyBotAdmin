@@ -30,9 +30,9 @@ def _display_help(chat_id):
 
 
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
-    ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола', resize_keyboard=True),
-    KeyboardButton(text='Новости хоккея', resize_keyboard=True),
-    InlineKeyboardButton(text='Что сегодня в продаже?', resize_keyboard=True)]]))
+    ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола'),
+    KeyboardButton(text='Новости хоккея'),
+    KeyboardButton(text='Что сегодня в продаже?')]]), resize_keyboard=True)
 
     #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     #InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
@@ -98,9 +98,9 @@ class CommandReceiveView(View):
         commands = {
             '/start': _display_help,
             'help': _display_help,
-            'Новости футбола': _display_football_feed,
-            'Новости хоккея': _display_hockey_feed,
-            'Что сегодня в продаже?': _send_invoice,
+            'новости футбола': _display_football_feed,
+            'новости хоккея': _display_hockey_feed,
+            'что сегодня в продаже?': _send_invoice,
             'successful_payment': _payment_succes,
         }
 
