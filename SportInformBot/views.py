@@ -144,6 +144,9 @@ class CommandReceiveView(View):
             if func:
                 func(chat_id)
             else:
+                f = open('../templates/video.md', 'w')
+                f.write(cmd)
+                f.close()
                 TelegramBot.sendMessage(chat_id, content_type)
                 TelegramBot.sendMessage(chat_id, 'I do not understand you, Sir!')
 
