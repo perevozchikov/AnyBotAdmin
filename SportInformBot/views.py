@@ -30,9 +30,9 @@ def _display_help(chat_id):
 
 
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
-    ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='football_feed', resize_keyboard=True),
-    KeyboardButton(text='hockey_feed', resize_keyboard=True),
-    InlineKeyboardButton(text='buy', resize_keyboard=True)]]))
+    ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола', resize_keyboard=True),
+    KeyboardButton(text='Новости хоккея', resize_keyboard=True),
+    InlineKeyboardButton(text='Что сегодня в продаже?', resize_keyboard=True)]]))
 
     #TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     #InlineKeyboardMarkup(inline_keyboard=[[InlineKeyboardButton(text='Новости хоккея', callback_data='hockey_feed')]]))
@@ -123,7 +123,15 @@ class CommandReceiveView(View):
                     cmd = 'successful_payment'
                 else:
                     #chat_id = pload['message']['chat']['id']
-                    cmd = pload['message'].get('text')  # command
+                    if pload['message'].get('text') == 'Новости футбола':
+                        cmd = 'football_feed'
+                    elif pload['message'].get('text') == 'Новости хоккея':
+                        cmd = 'hockey_feed'
+                    elif pload['message'].get('text') == 'Что сегодня в продаже?':
+                        cmd = 'buy'
+                    else
+                        cmd = pload['message'].get('text')  # command
+
                 #TelegramBot.sendMessage(chat_id, flavor, parse_mode='Markdown')
             elif 'shipping_query' in pload:
                 query_id, from_id, invoice_payload = telepot.glance(pload['shipping_query'], flavor='shipping_query')
