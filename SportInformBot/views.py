@@ -25,8 +25,8 @@ def _display_help(chat_id):
 
     TelegramBot.sendMessage(chat_id, render_to_string('help.md'), reply_markup=
     ReplyKeyboardMarkup(keyboard=[[KeyboardButton(text='Новости футбола'),
-    KeyboardButton(text='Новости хоккея'),
-    KeyboardButton(text='Что сегодня в продаже?'), KeyboardButton(text='Видео дня')]], resize_keyboard=True))
+    KeyboardButton(text='Новости хоккея')],
+    [KeyboardButton(text='Что сегодня в продаже?'), KeyboardButton(text='Видео дня')]], resize_keyboard=True))
 
     return None
 
